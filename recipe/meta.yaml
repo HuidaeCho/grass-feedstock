@@ -25,6 +25,7 @@ requirements:
     - gettext-tools
     - make           # [unix]
     - pkg-config
+    - python         # [osx]
     - sed            # [unix]
   host:
     - bzip2
