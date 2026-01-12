@@ -27,6 +27,7 @@ requirements:
     - pkg-config
     - python         # [osx]
     - sed            # [unix]
+    - zlib           # [osx-arm64]
   host:
     - bzip2
     - cairo
