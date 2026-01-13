@@ -76,11 +76,6 @@ sed -Ei 's/^(ICONVLIB *= *$)/\1-liconv/' include/Make/Platform.make
 
 make -j$CPU_COUNT
 
-if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
-echo "===== etc/fontcap ====="
-cat "$target_dist/etc/fontcap"
-echo "======================="
-fi
 [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ] &&
 	GISRC=junk GISBASE="$target_dist" "$build_dist/bin/g.mkfontcap" --o
 
