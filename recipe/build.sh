@@ -30,9 +30,7 @@ osx-*)
 esac
 
 if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
-	mkdir -p build-tools
-	(cd build-tools
-
+	(
 	export CC="${CC_FOR_BUILD}"
 	export CXX="${CXX_FOR_BUILD}"
 	export AR="${AR_FOR_BUILD}"
@@ -41,7 +39,7 @@ if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
 	export CPPFLAGS="-I${BUILD_PREFIX}/include ${CPPFLAGS}"
 	export LDFLAGS="-L${BUILD_PREFIX}/lib ${LDFLAGS}"
 
-	../configure \
+	./configure \
 		--host="$BUILD" \
 		--without-cairo \
 		--without-fftw \
