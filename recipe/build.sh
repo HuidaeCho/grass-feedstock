@@ -58,8 +58,9 @@ if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
 
 	for tool in include lib/datetime lib/gis utils general/g.parser; do
 		make -j$CPU_COUNT -C $tool
-	done)
-	ls -al "$(pwd)/dist.$BUILD/bin"
+	done
+	)
+	sed -Ei 's#(\tPATH=")#\1'"$(pwd)/dist.$BUILD/bin:"'#' include/Make/Rules.make
 fi
 
 ./configure \
