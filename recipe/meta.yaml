@@ -23,6 +23,7 @@ requirements:
     - bison
     - flex
     - gettext-tools
+    - libgdal-core   # [build_platform != target_platform]
     - libpng         # [build_platform != target_platform]
     - make           # [unix]
     - pkg-config
