@@ -60,7 +60,9 @@ if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
 		make -j$CPU_COUNT -C $tool
 	done
 	)
-	sed -Ei 's#(\tPATH=")#\1'"$(pwd)/dist.$BUILD/bin:"'#' include/Make/Rules.make
+
+	dist_build="$(pwd)/dist.$BUILD"
+	sed -Ei 's#(\tPATH=")#\1'"$dist_build"'/bin:#' include/Make/Rules.make
 fi
 
 ./configure \
