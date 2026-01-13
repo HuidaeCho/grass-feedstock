@@ -5,12 +5,12 @@ export CXXFLAGS="$CXXFLAGS -D_LIBCPP_DISABLE_AVAILABILITY"
 
 if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
 	(
-	export CC="${CC_FOR_BUILD}"
-	export CXX="${CXX_FOR_BUILD}"
-	export AR="${AR_FOR_BUILD}"
-	export RANLIB="${RANLIB_FOR_BUILD}"
-	export CPPFLAGS="-I${BUILD_PREFIX}/include ${CPPFLAGS}"
-	export LDFLAGS="-L${BUILD_PREFIX}/lib ${LDFLAGS}"
+	export CC="$CC_FOR_BUILD"
+	export CXX="$CXX_FOR_BUILD"
+	export AR="$AR_FOR_BUILD"
+	export RANLIB="$RANLIB_FOR_BUILD"
+	export CPPFLAGS="-I$BUILD_PREFIX/include $CPPFLAGS"
+	export LDFLAGS="-L$BUILD_PREFIX/lib $LDFLAGS"
 
 	./configure \
 		--host="$BUILD" \
@@ -41,8 +41,8 @@ if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
 	done
 	)
 
-	dist_build="$(pwd)/dist.$BUILD"
-	sed -Ei 's#(\tPATH=")#\1'"$dist_build"'/bin:#' include/Make/Rules.make
+	build_dist="$(pwd)/dist.$BUILD"
+	sed -Ei 's#(\tPATH=")#\1'"$build_dist"'/bin:#' include/Make/Rules.make
 fi
 
 case "$target_platform" in
@@ -55,7 +55,7 @@ osx-*)
 esac
 
 ./configure \
-	--prefix=$PREFIX \
+	--prefix="$PREFIX" \
 	--with-blas \
 	--with-bzlib \
 	--with-lapack \
@@ -73,3 +73,6 @@ sed -Ei 's/^(ICONVLIB *= *$)/\1-liconv/' include/Make/Platform.make
 
 make -j$CPU_COUNT
 make install
+
+[ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ] &&
+	GISRC=junk GISBASE="$PREFIX" $build_dist/bin/g.mkfontcap
