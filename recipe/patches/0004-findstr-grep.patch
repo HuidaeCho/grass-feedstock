@@ -1,0 +1,36 @@
+--- cmake/modules/build_addon.cmake.orig	2026-04-17 05:11:06.000000000 -0600
++++ cmake/modules/build_addon.cmake	2026-05-08 07:56:06.399291905 -0600
+@@ -47,13 +47,13 @@
+ if(WIN32)
+   set(null_device nul)
+   set(search_command findstr /v)
+-  set(html_search_str "\"</body>\|</html>\|</div> <!-- end container -->\"")
++  set(html_search_str "\"</body> </html> </div>.<!--.end.container.-->\"")
+   set(sep "\;")
+   string(REPLACE ";" "${sep}" env_path "${env_path}")
+ else()
+   set(null_device /dev/null)
+   set(search_command grep -v)
+-  set(html_search_str "\'</body>\|</html>\|</div> <!-- end container -->\'")
++  set(html_search_str "'</body>\|</html>\|</div>.<!--.end.container.-->'")
+   set(sep ":")
+ endif()
+ 
+--- cmake/modules/generate_docs.cmake.orig	2026-04-17 05:11:06.000000000 -0600
++++ cmake/modules/generate_docs.cmake	2026-05-08 07:56:24.749064089 -0600
+@@ -100,13 +100,13 @@
+     set(py ".py")
+     set(null_device nul)
+     set(search_cmd findstr /v)
+-    set(html_search_str "\"</body>\|</html>\|</div> <!-- end container -->\"")
++    set(html_search_str "\"</body> </html> </div>.<!--.end.container.-->\"")
+   else()
+     set(ext "")
+     set(py "")
+     set(null_device /dev/null)
+     set(search_cmd grep -v)
+-    set(html_search_str "\'</body>\|</html>\|</div> <!-- end container -->\'")
++    set(html_search_str "'</body>\|</html>\|</div>.<!--.end.container.-->'")
+   endif()
+ 
+   if(D_HTML_DESCR)

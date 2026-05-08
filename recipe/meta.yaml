@@ -12,6 +12,7 @@ source:
     - patches/0001-cmake-win.patch
     - patches/0002-cmake-gui-scripts.patch
     - patches/0003-cmake-module-install-paths.patch
+    - patches/0004-findstr-grep.patch
 
 build:
   number: 0
