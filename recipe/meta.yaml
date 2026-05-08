@@ -35,6 +35,7 @@ requirements:
     - fftw
     - fontconfig
     - freetype
+    - geos
     - gettext       # [osx]
     - libgdal-core
     - libgl-devel   # [linux]
