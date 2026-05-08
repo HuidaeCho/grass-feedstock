@@ -27,6 +27,7 @@ requirements:
     - m2-flex        # [win]
     - make           # [unix]
     - pkg-config
+    - python         # [build_platform != target_platform]
   host:
     - bzip2
     - cairo
