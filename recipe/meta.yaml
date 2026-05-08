@@ -60,6 +60,7 @@ requirements:
     - zstd
   run:
     - libgomp      # [linux]
+    - libopenblas
     - llvm-openmp  # [osx]
     - python
     - pywin32      # [win]
