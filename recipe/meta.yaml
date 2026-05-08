@@ -42,7 +42,7 @@ requirements:
     - libglu        # [linux]
     - libgomp       # [linux]
     - libiconv
-    - libopenblas
+    - openblas
     - libpdal-core
     - libpng
     - libpq
