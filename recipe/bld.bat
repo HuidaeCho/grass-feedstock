@@ -9,6 +9,9 @@ if errorlevel 1 exit /b 1
 cmake --install build --config Release
 if errorlevel 1 exit /b 1
 
+mkdir "%PREFIX%\etc\conda\activate.d"
+echo set "PATH=%CONDA_PREFIX%\Library\lib\grass85\bin;%%PATH%%" > "%PREFIX%\etc\conda\activate.d\grass-activate.bat"
+
 echo "===== Installed Files ====="
 dir /s /b %PREFIX%
 
