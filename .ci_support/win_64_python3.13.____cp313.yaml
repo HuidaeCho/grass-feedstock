@@ -1,17 +1,7 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
-MACOSX_SDK_VERSION:
-- '11.0'
 bzip2:
 - '1'
 c_compiler:
-- clang
-c_compiler_version:
-- '19'
-c_stdlib:
-- macosx_deployment_target
-c_stdlib_version:
-- '11.0'
+- vs2022
 cairo:
 - '1'
 channel_sources:
@@ -19,9 +9,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
-cxx_compiler_version:
-- '19'
+- vs2022
 fftw:
 - '3'
 fontconfig:
@@ -42,12 +30,10 @@ libsqlite:
 - '3'
 libtiff:
 - '4.7'
-llvm_openmp:
-- '19'
-macos_machine:
-- x86_64-apple-darwin13.4.0
 openblas:
 - 0.3.*
+pcre:
+- '8'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -55,14 +41,9 @@ pin_run_as_build:
 proj:
 - '9.7'
 python:
-- 3.10.* *_cpython
-readline:
-- '8'
+- 3.13.* *_cp313
 target_platform:
-- osx-64
-zip_keys:
-- - c_compiler_version
-  - cxx_compiler_version
+- win-64
 zlib:
 - '1'
 zstd:
