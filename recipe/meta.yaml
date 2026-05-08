@@ -1,5 +1,5 @@
-{% set version = "8.4.2" %}
-{% set sha256 = "68abc6c119939e40736a96360e9f6ab73e56f74772ec88c31688136215047a8c" %}
+{% set version = "8.5.0RC1" %}
+{% set sha256 = "ba2a00f56e584da598108bd825dfe9731b0bdf56d88fb890e46daf08842d77a7" %}
 
 package:
   name: grass
@@ -9,33 +9,28 @@ source:
   url: https://github.com/OSGeo/grass/releases/download/{{ version }}/grass-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - patches/0001-autoconf-cross-compile-file-checks.patch
-    - patches/0002-g-mkfontcap-cross-compile-skip.patch
+    - patches/0001-cmake-win.patch
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - {{ stdlib("c") }}
-    - bison
-    - flex
+    - {{ stdlib("c") }}      # [unix]
+    - bison          # [unix]
+    - cmake
+    - flex           # [unix]
     - gettext-tools
-    - libgdal-core   # [build_platform != target_platform]
-    - libpng         # [build_platform != target_platform]
+    - m2-bison       # [win]
+    - m2-flex        # [win]
     - make           # [unix]
     - pkg-config
-    - proj           # [build_platform != target_platform]
-    - python         # [osx]
-    - sed            # [unix]
-    - zlib           # [build_platform != target_platform]
   host:
     - bzip2
     - cairo
-    - expat
     - fftw
     - fontconfig
     - freetype
@@ -45,16 +40,18 @@ requirements:
     - libglu        # [linux]
     - libgomp       # [linux]
     - libiconv
-    - libopenblas
     - libpdal-core
     - libpng
     - libpq
     - libsqlite
     - libtiff
     - llvm-openmp   # [osx]
+    - openblas
+    - pcre          # [win]
     - proj
     - python
-    - readline
+    - pywin32       # [win]
+    - readline      # [unix]
     - wxpython
     - xorg-libx11   # [linux]
     - zlib
@@ -63,6 +60,7 @@ requirements:
     - libgomp      # [linux]
     - llvm-openmp  # [osx]
     - python
+    - pywin32      # [win]
     - wxpython
 
 test:
