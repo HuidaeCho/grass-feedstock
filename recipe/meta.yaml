@@ -13,6 +13,8 @@ source:
 
 build:
   number: 0
+  missing_dso_whitelist:
+    - "*/grass_*.dll"  # [win]
 
 requirements:
   build:
