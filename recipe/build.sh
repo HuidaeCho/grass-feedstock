@@ -2,7 +2,6 @@
 set -e
 
 if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
-	(
 	export PYTHON="${BUILD_PREFIX}/bin/python"
 	export CC="$CC_FOR_BUILD"
 	export CXX="$CXX_FOR_BUILD"
@@ -10,7 +9,6 @@ if [ "$CONDA_BUILD_CROSS_COMPILATION" = "1" ]; then
 	export RANLIB="$RANLIB_FOR_BUILD"
 	export CPPFLAGS="-I$BUILD_PREFIX/include $CPPFLAGS"
 	export LDFLAGS="-L$BUILD_PREFIX/lib $LDFLAGS"
-	)
 fi
 
 cmake -B build $CMAKE_ARGS \
