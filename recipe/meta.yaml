@@ -1,5 +1,5 @@
-{% set version = "8.4.2" %}
-{% set sha256 = "68abc6c119939e40736a96360e9f6ab73e56f74772ec88c31688136215047a8c" %}
+{% set version = "8.5.0" %}
+{% set sha256 = "5d06c81504ea961fab709943cf41d8b3e27cdbaae7ccca5baf3f7bb0c5d9f33d" %}
 
 package:
   name: grass
@@ -9,60 +9,65 @@ source:
   url: https://github.com/OSGeo/grass/releases/download/{{ version }}/grass-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - patches/0001-autoconf-cross-compile-file-checks.patch
-    - patches/0002-g-mkfontcap-cross-compile-skip.patch
+    - patches/6383-cmake-win.patch
+    - patches/7310-remote-decision-using-source-url.patch
+    - patches/7376-win-python-home.patch
 
 build:
-  number: 3
-  skip: true  # [win]
+  number: 0
+  missing_dso_whitelist:
+    - "*/grass_*.dll"  # [win]
+  skip: true  # [osx and arm64]
 
 requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - {{ stdlib("c") }}
-    - bison
-    - flex
+    - {{ stdlib("c") }}      # [unix]
+    - bison          # [unix]
+    - cmake
+    - flex           # [unix]
     - gettext-tools
-    - libgdal-core   # [build_platform != target_platform]
-    - libpng         # [build_platform != target_platform]
+    - m2-bison       # [win]
+    - m2-flex        # [win]
     - make           # [unix]
     - pkg-config
-    - proj           # [build_platform != target_platform]
-    - python         # [osx]
-    - sed            # [unix]
-    - zlib           # [build_platform != target_platform]
+    - python         # [build_platform != target_platform]
   host:
     - bzip2
     - cairo
-    - expat
     - fftw
     - fontconfig
     - freetype
+    - geos
     - gettext       # [osx]
     - libgdal-core
     - libgl-devel   # [linux]
     - libglu        # [linux]
     - libgomp       # [linux]
     - libiconv
-    - libopenblas
     - libpdal-core
     - libpng
     - libpq
     - libsqlite
     - libtiff
     - llvm-openmp   # [osx]
+    - openblas
+    - pcre          # [win]
     - proj
     - python
-    - readline
+    - pywin32       # [win]
+    - readline      # [unix]
     - wxpython
     - xorg-libx11   # [linux]
     - zlib
     - zstd
   run:
     - libgomp      # [linux]
+    - libopenblas
     - llvm-openmp  # [osx]
     - python
+    - pywin32      # [win]
     - wxpython
 
 test:
