@@ -17,6 +17,7 @@ build:
   number: 0
   missing_dso_whitelist:
     - "*/grass_*.dll"  # [win]
+  skip: true  # [osx and arm64]
 
 requirements:
   build:
